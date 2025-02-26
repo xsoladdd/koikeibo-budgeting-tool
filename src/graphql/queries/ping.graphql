@@ -1,0 +1,5 @@
+query ping {
+  global_vars(where: { key: { _eq: "ping" } }) {
+    value
+  }
+}

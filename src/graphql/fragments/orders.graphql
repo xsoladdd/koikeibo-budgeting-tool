@@ -1,0 +1,19 @@
+fragment OrderFragment on orders {
+  created_at
+  id
+  # isForLater
+  # laterTime
+  order_meals {
+    ...OrderMealFragment
+  }
+  status
+  updated_at
+  userId
+  user {
+    ...UserFragment
+  }
+  total
+  shortId
+  pickupTime
+  note
+}

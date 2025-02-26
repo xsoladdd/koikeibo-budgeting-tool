@@ -1,0 +1,10 @@
+fragment OrderMealFragment on order_meals {
+  created_at
+  id
+  meal {
+    ...MealFragment
+  }
+  mealId
+  quantity
+  updated_at
+}

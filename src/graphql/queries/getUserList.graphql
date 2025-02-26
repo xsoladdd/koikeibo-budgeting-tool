@@ -1,0 +1,20 @@
+query getUserList(
+  $orderBy: [users_order_by!]
+  $limit: Int
+  $offset: Int
+  $where: users_bool_exp = {}
+) {
+  users(
+    order_by: $orderBy
+    where: { _and: [{ role: { _neq: "BACKDOOR_ADMIN" } }, $where] }
+    limit: $limit
+    offset: $offset
+  ) {
+    ...UserFragment
+  }
+  users_aggregate(where: $where) {
+    aggregate {
+      count
+    }
+  }
+}

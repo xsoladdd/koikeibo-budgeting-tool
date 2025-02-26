@@ -1,0 +1,14 @@
+fragment UserFragment on users {
+  id
+  updated_at
+  firstname
+  lastname
+  email
+  isLocked
+  # password
+  role
+  section
+  strand
+  grade
+  changePass
+}

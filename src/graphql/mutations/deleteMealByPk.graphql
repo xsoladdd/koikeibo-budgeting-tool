@@ -1,0 +1,5 @@
+mutation deleteMealByPk($id: Int!) {
+  delete_meals_by_pk(id: $id) {
+    id
+  }
+}

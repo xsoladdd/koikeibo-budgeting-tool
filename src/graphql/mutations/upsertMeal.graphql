@@ -1,0 +1,14 @@
+mutation upsertMeal($objects: [meals_insert_input!]!) {
+  insert_meals(
+    objects: $objects
+    on_conflict: {
+      update_columns: [description, image, isActive, name, price, category_id]
+      constraint: meals_pkey
+    }
+  ) {
+    returning {
+      ...MealFragment
+    }
+    affected_rows
+  }
+}

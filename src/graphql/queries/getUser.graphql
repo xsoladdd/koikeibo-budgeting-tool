@@ -1,0 +1,5 @@
+query getUser($email: String) {
+  users(where: { email: { _eq: $email }, isLocked: { _neq: true } }) {
+    ...UserFragment
+  }
+}

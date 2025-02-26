@@ -1,0 +1,8 @@
+mutation updateMeal($where: meals_bool_exp!, $set: meals_set_input) {
+  update_meals(where: $where, _set: $set) {
+    affected_rows
+    returning {
+      ...MealFragment
+    }
+  }
+}

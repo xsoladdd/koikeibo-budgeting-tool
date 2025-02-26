@@ -1,0 +1,14 @@
+mutation upsertOrder($objects: [orders_insert_input!]!) {
+  insert_orders(
+    objects: $objects
+    on_conflict: {
+      update_columns: [pickupTime, total, status]
+      constraint: orders_pkey
+    }
+  ) {
+    affected_rows
+    returning {
+      ...OrderFragment
+    }
+  }
+}

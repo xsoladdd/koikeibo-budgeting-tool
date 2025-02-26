@@ -1,0 +1,8 @@
+mutation updateOrderStatus($id: uuid!, $status: String!) {
+  update_orders(where: { id: { _eq: $id } }, _set: { status: $status }) {
+    returning {
+      ...OrderFragment
+    }
+    affected_rows
+  }
+}

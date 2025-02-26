@@ -1,0 +1,8 @@
+mutation updateUser($where: users_bool_exp!, $set: users_set_input) {
+  update_users(where: $where, _set: $set) {
+    affected_rows
+    returning {
+      ...UserFragment
+    }
+  }
+}

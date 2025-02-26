@@ -1,0 +1,20 @@
+mutation upsertUser($object: users_insert_input!) {
+  insert_users_one(
+    object: $object
+    on_conflict: {
+      update_columns: [
+        password
+        isLocked
+        role
+        grade
+        strand
+        section
+        firstname
+        lastname
+      ]
+      constraint: users_email_key
+    }
+  ) {
+    ...UserFragment
+  }
+}

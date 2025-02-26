@@ -1,0 +1,11 @@
+query getCategorizedMeal {
+  categories(
+    where: { meals: { id: { _is_null: false }, isActive: { _neq: false } } }
+  ) {
+    id
+    name
+    meals(where: { isActive: { _eq: true } }) {
+      ...MealFragment
+    }
+  }
+}

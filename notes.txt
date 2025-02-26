@@ -1,0 +1,16 @@
+TODO
+    - New Password prompt
+    - Checkout functionalities
+    - Create page for managing order status.
+    - Settings page
+        - Category CRUD
+
+
+ONGOING
+
+
+DOONE
+    - Image upload to cloudinary
+    - Menu Management
+    - Create user form
+    - manage-menu page.
