@@ -1,35 +1,19 @@
 "use client";
-import { NextPage } from "next";
-// import { useFoodStore } from "./context/useFoodContext";
-// import { useGetCategorizedMealQuery } from "@/graphql/generated";
-import PageLoading from "../Components/PageLoading";
-// import MealList from "./Components/MealList";
 import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import { Plus, Settings } from "lucide-react";
-import { useState } from "react";
-import BudgetTable from "./BudgetTable";
-import EmptyState from "./EmptyState";
-import { initialData } from "./helper";
+import { BookCheck, Settings } from "lucide-react";
+import FinalizeBudgetDialog from "./FinalizeBudgetDialog";
 import useBudgetStore from "./useBudgetStore";
-
-const hasData = true;
-const isLoading = false;
+import { pesoSign } from "@/lib/pesoSign";
 
 const Filter: React.FC = () => {
-  const { record, setEditNewDialogStatus, setSettingsForm } = useBudgetStore();
-  const [isReviewDialogOpen, setIsReviewDialogOpen] = useState(false);
+  const {
+    record,
+    setEditNewDialogStatus,
+    setSettingsForm,
+    setIsReviewDialogOpen,
+    recordLoading,
+  } = useBudgetStore();
 
   const handleSettingsButton = () => {
     const culturePercentage = record?.sub_records.find(
@@ -52,13 +36,6 @@ const Filter: React.FC = () => {
       ({ type }) => type === "wants"
     )?.percentage;
 
-    console.log(
-      needsPercentage,
-      wantsPercentage,
-      culturePercentage,
-      extraPercentage,
-      savingsPercentage
-    );
     setSettingsForm({
       culturePercentage: culturePercentage || 0,
       extraPercentage: extraPercentage || 0,
@@ -75,71 +52,29 @@ const Filter: React.FC = () => {
       <div className="w-full flex justify-between items-center pb-4">
         <div className="flex items-center space-x-4 justify-between w-full">
           <div className="flex gap-4 place-items-center">
-            <Label>Income: ${record?.income}</Label>
+            <Label>
+              Income: {pesoSign}
+              {record?.income}
+            </Label>
           </div>
           <div className="flex gap-4">
-            {" "}
             <Button
               variant="outline"
-              disabled={isLoading || (!isLoading && !hasData)}
+              disabled={recordLoading || (!recordLoading && !record)}
               onClick={handleSettingsButton}
             >
-              <Settings className="mr-2 h-4 w-4" />
-              Settings
+              <Settings className="h-4 w-4" />
+              <span className="hidden sm:block"> Settings</span>
             </Button>
-            <Dialog
-              open={isReviewDialogOpen}
-              onOpenChange={setIsReviewDialogOpen}
+            <Button
+              className=""
+              disabled={recordLoading || (!recordLoading && !record)}
+              onClick={() => setIsReviewDialogOpen(true)}
             >
-              <DialogTrigger
-                asChild
-                disabled={isLoading || (!isLoading && !hasData)}
-              >
-                <Button>Review and Finalize Budget</Button>
-              </DialogTrigger>
-              <DialogContent className="sm:max-w-[425px]">
-                <DialogHeader>
-                  <DialogTitle>Review and Finalize Budget</DialogTitle>
-                  <DialogDescription>
-                    Please answer the following questions to complete your
-                    budget review.
-                  </DialogDescription>
-                </DialogHeader>
-                <div className="grid gap-4 py-4">
-                  <div className="grid gap-2">
-                    <Label htmlFor="note">Note:</Label>
-                    <Textarea
-                      id="note"
-                      placeholder="Add any general notes here"
-                    />
-                  </div>
-                  <div className="grid gap-2">
-                    <Label htmlFor="spend-wisely">Did I spend wisely?</Label>
-                    <Textarea
-                      id="spend-wisely"
-                      placeholder="Reflect on your spending habits"
-                    />
-                  </div>
-                  <div className="grid gap-2">
-                    <Label htmlFor="improve">
-                      How can I improve next month?
-                    </Label>
-                    <Textarea
-                      id="improve"
-                      placeholder="List your improvement ideas"
-                    />
-                  </div>
-                </div>
-                <DialogFooter>
-                  <Button
-                    type="submit"
-                    onClick={() => setIsReviewDialogOpen(false)}
-                  >
-                    Save and Close
-                  </Button>
-                </DialogFooter>
-              </DialogContent>
-            </Dialog>
+              <BookCheck className="h-4 w-4" />
+              <span className="hidden sm:block"> Review Entry</span>
+            </Button>
+            <FinalizeBudgetDialog />
           </div>
         </div>
       </div>

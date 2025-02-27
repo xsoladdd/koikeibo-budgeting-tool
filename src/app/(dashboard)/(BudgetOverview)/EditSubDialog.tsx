@@ -21,6 +21,7 @@ import React, { useState } from "react";
 import useBudgetStore from "./useBudgetStore";
 import { ConfirmationDialog } from "@/components/WarningDialog";
 import { toast } from "sonner";
+import { pesoSign } from "@/lib/pesoSign";
 
 const EditSubDialog: React.FC = () => {
   const [item, setItem] = useState<{
@@ -146,7 +147,8 @@ const EditSubDialog: React.FC = () => {
                 )}
                 {selectedRecord.map((item, index) => (
                   <li key={index}>
-                    {item.title} - ${item.value} -{" "}
+                    {item.title} - {pesoSign}
+                    {item.value} -{" "}
                     <Button
                       variant="link"
                       size="icon"

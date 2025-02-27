@@ -1,0 +1,16 @@
+query getPreviousRecords($user_id: uuid, $offset: Int = 0, $limit: Int = 10) {
+  records(
+    where: { isActive: { _eq: false }, user_id: { _eq: $user_id } }
+    offset: $offset
+    limit: $limit
+  ) {
+    ...RecordFragment
+  }
+  records_aggregate(
+    where: { isActive: { _eq: false }, user_id: { _eq: $user_id } }
+  ) {
+    aggregate {
+      count
+    }
+  }
+}

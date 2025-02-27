@@ -29,6 +29,8 @@ interface BudgetState {
   activeEdit: { type: string; id: number };
   setActiveEdit: (type: string, id: number) => void;
   resetActiveEdit: () => void;
+  isReviewDialogOpen: boolean;
+  setIsReviewDialogOpen: (status: boolean) => void;
 }
 
 const defaultSettingsForm = {
@@ -41,11 +43,6 @@ const defaultSettingsForm = {
 };
 
 const defaultActiveEdit = { type: "", id: 0 };
-// const [newItem, setNewItem] = useState({ title: "", amount: "" });
-// const [activeEdit, setActiveEdit] = useState({
-//   type: "",
-//   id: 0,
-// });
 
 const useBudgetStore = create<BudgetState>((set) => ({
   budget: 0,
@@ -66,6 +63,8 @@ const useBudgetStore = create<BudgetState>((set) => ({
   activeEdit: defaultActiveEdit,
   setActiveEdit: (type, id) => set({ activeEdit: { type, id } }),
   resetActiveEdit: () => set({ activeEdit: defaultActiveEdit }),
+  isReviewDialogOpen: false,
+  setIsReviewDialogOpen: (status) => set({ isReviewDialogOpen: status }),
 }));
 
 export default useBudgetStore;

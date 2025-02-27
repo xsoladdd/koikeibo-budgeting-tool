@@ -25,6 +25,7 @@ import {
 import { GRADE_LEVEL, SECTION, STRANDS } from "@/var";
 import { Input } from "@/components/ui/input";
 import TablePagination from "../Components/TablePagination";
+import { Edit } from "lucide-react";
 
 const AccountTable: React.FC = ({}) => {
   const [filter, setFilter] = useState({
@@ -229,13 +230,13 @@ const AccountTable: React.FC = ({}) => {
               <TableCell>{user.section || "N/A"}</TableCell>
               <TableCell className="text-right">
                 <Button
-                  variant="outline"
-                  size="sm"
+                  variant="link"
+                  size="icon"
                   onClick={() => {
                     handleEditUser(user);
                   }}
                 >
-                  Edit
+                  <Edit />
                 </Button>
               </TableCell>
             </TableRow>

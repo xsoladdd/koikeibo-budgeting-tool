@@ -3,7 +3,7 @@ mutation upsertRecord($objects: [records_insert_input!] = {}) {
     objects: $objects
     on_conflict: {
       constraint: records_pkey
-      update_columns: [income, isActive, note, question1, question2]
+      update_columns: [income, isActive, note, question1, question2, isActive]
     }
   ) {
     affected_rows

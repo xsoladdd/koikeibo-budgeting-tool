@@ -2678,6 +2678,15 @@ export type UpsertUserMutationVariables = Exact<{
 
 export type UpsertUserMutation = { __typename?: 'mutation_root', insert_users_one?: { __typename?: 'users', id: any, updated_at: any, firstname: string, lastname: string, email: string, isLocked: boolean, role: string, section?: string | null, strand?: string | null, grade?: string | null, changePass?: boolean | null } | null };
 
+export type GetPreviousRecordsQueryVariables = Exact<{
+  user_id?: InputMaybe<Scalars['uuid']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+}>;
+
+
+export type GetPreviousRecordsQuery = { __typename?: 'query_root', records: Array<{ __typename?: 'records', id: any, question2: string, question1: string, note: string, income: number, inc_id: number, sub_records: Array<{ __typename?: 'sub_record', id: number, percentage: number, type: string, entries: Array<{ __typename?: 'entry', id: any, title: string, value: number, sub_record_id?: number | null }> }> }>, records_aggregate: { __typename?: 'records_aggregate', aggregate?: { __typename?: 'records_aggregate_fields', count: number } | null } };
+
 export type GetRecordQueryVariables = Exact<{
   user_id?: InputMaybe<Scalars['uuid']['input']>;
 }>;
@@ -2899,7 +2908,7 @@ export const UpsertRecordDocument = /*#__PURE__*/ gql`
     mutation upsertRecord($objects: [records_insert_input!] = {}) {
   insert_records(
     objects: $objects
-    on_conflict: {constraint: records_pkey, update_columns: [income, isActive, note, question1, question2]}
+    on_conflict: {constraint: records_pkey, update_columns: [income, isActive, note, question1, question2, isActive]}
   ) {
     affected_rows
     returning {
@@ -2970,6 +2979,57 @@ export function useUpsertUserMutation(baseOptions?: Apollo.MutationHookOptions<U
 export type UpsertUserMutationHookResult = ReturnType<typeof useUpsertUserMutation>;
 export type UpsertUserMutationResult = Apollo.MutationResult<UpsertUserMutation>;
 export type UpsertUserMutationOptions = Apollo.BaseMutationOptions<UpsertUserMutation, UpsertUserMutationVariables>;
+export const GetPreviousRecordsDocument = /*#__PURE__*/ gql`
+    query getPreviousRecords($user_id: uuid, $offset: Int = 0, $limit: Int = 10) {
+  records(
+    where: {isActive: {_eq: false}, user_id: {_eq: $user_id}}
+    offset: $offset
+    limit: $limit
+  ) {
+    ...RecordFragment
+  }
+  records_aggregate(where: {isActive: {_eq: false}, user_id: {_eq: $user_id}}) {
+    aggregate {
+      count
+    }
+  }
+}
+    ${RecordFragmentFragmentDoc}`;
+
+/**
+ * __useGetPreviousRecordsQuery__
+ *
+ * To run a query within a React component, call `useGetPreviousRecordsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetPreviousRecordsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetPreviousRecordsQuery({
+ *   variables: {
+ *      user_id: // value for 'user_id'
+ *      offset: // value for 'offset'
+ *      limit: // value for 'limit'
+ *   },
+ * });
+ */
+export function useGetPreviousRecordsQuery(baseOptions?: Apollo.QueryHookOptions<GetPreviousRecordsQuery, GetPreviousRecordsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetPreviousRecordsQuery, GetPreviousRecordsQueryVariables>(GetPreviousRecordsDocument, options);
+      }
+export function useGetPreviousRecordsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetPreviousRecordsQuery, GetPreviousRecordsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetPreviousRecordsQuery, GetPreviousRecordsQueryVariables>(GetPreviousRecordsDocument, options);
+        }
+export function useGetPreviousRecordsSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetPreviousRecordsQuery, GetPreviousRecordsQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<GetPreviousRecordsQuery, GetPreviousRecordsQueryVariables>(GetPreviousRecordsDocument, options);
+        }
+export type GetPreviousRecordsQueryHookResult = ReturnType<typeof useGetPreviousRecordsQuery>;
+export type GetPreviousRecordsLazyQueryHookResult = ReturnType<typeof useGetPreviousRecordsLazyQuery>;
+export type GetPreviousRecordsSuspenseQueryHookResult = ReturnType<typeof useGetPreviousRecordsSuspenseQuery>;
+export type GetPreviousRecordsQueryResult = Apollo.QueryResult<GetPreviousRecordsQuery, GetPreviousRecordsQueryVariables>;
 export const GetRecordDocument = /*#__PURE__*/ gql`
     query getRecord($user_id: uuid) {
   records(limit: 1, where: {isActive: {_eq: true}, user_id: {_eq: $user_id}}) {

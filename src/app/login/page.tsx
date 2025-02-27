@@ -83,7 +83,7 @@ const LoginPage = () => {
 
   return (
     <div className="flex min-h-screen items-center justify-center ">
-      <Card className="w-full max-w-md">
+      <Card className="w-full max-w-md m-3">
         <form onSubmit={handleLogin}>
           <CardHeader>
             <div className="  flex place-content-center place-items-center">

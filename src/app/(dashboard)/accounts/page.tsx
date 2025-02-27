@@ -10,17 +10,14 @@ export type User = GetUserListQuery["users"][0];
 
 const page: React.FC = () => {
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="flex justify-between">
-        <h1 className="text-3xl font-bold mb-6">User Management</h1>
-      </div>
-
+    <main className="flex min-h-screen flex-col items-center py-24">
+      <h1 className="text-2xl font-bold mb-6">Account Management</h1>
       <Card>
         <CardContent>
           <AccountTable />
         </CardContent>
       </Card>
-    </div>
+    </main>
   );
 };
 export default page;

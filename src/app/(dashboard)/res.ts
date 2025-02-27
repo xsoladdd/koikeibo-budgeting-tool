@@ -6,7 +6,7 @@ export const navItems = [
   },
   {
     name: "Recents",
-    href: "/",
+    href: "/recents",
     roleAccess: ["*"],
   },
   {
