@@ -1,9 +1,6 @@
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
-import GitHub from "next-auth/providers/github";
 import { restGraphqlFetch } from "./restGraphqlFetch";
-import { gql } from "@apollo/client";
-import { checkPassword } from "./passwordHash";
 
 const getUserQuery = `
   query getUser($email: String) {

@@ -1,0 +1,10 @@
+mutation upsertEntry(
+  $objects: [entry_insert_input!] = {}
+  $on_conflict: entry_on_conflict
+) {
+  insert_entry(objects: $objects, on_conflict: $on_conflict) {
+    returning {
+      ...EntryFragment
+    }
+  }
+}

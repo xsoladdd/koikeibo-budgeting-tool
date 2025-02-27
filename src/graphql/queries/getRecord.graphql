@@ -1,0 +1,8 @@
+query getRecord($user_id: uuid) {
+  records(
+    limit: 1
+    where: { isActive: { _eq: true }, user_id: { _eq: $user_id } }
+  ) {
+    ...RecordFragment
+  }
+}

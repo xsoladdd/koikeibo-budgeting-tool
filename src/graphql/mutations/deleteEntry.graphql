@@ -1,0 +1,5 @@
+mutation deleteEntry($id: uuid_comparison_exp = { _eq: "" }) {
+  delete_entry(where: { id: $id }) {
+    affected_rows
+  }
+}

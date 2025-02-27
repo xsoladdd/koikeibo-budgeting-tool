@@ -3,8 +3,6 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { SessionProvider } from "next-auth/react";
 import ApolloGraphqlProvider from "./providers/ApolloGraphqlProvider";
-import ToastProvider from "./providers/ToastProvider";
-
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -33,9 +31,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <ApolloGraphqlProvider>
-          <SessionProvider>
-            <ToastProvider>{children}</ToastProvider>
-          </SessionProvider>
+          <SessionProvider>{children}</SessionProvider>
         </ApolloGraphqlProvider>
       </body>
     </html>

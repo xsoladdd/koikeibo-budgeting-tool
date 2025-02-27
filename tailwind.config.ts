@@ -10,6 +10,10 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        custom: {
+          primary: "#1A2030",
+          secodary: "#902716",
+        },
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         card: {
@@ -61,5 +65,3 @@ const config: Config = {
   plugins: [require("tailwindcss-animate")],
 };
 export default config;
-
-

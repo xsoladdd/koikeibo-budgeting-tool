@@ -1,0 +1,16 @@
+fragment RecordFragment on records {
+  id
+  question2
+  question1
+  sub_records {
+    id
+    percentage
+    type
+    entries(order_by: { created_at: asc }) {
+      ...EntryFragment
+    }
+  }
+  note
+  income
+  inc_id
+}

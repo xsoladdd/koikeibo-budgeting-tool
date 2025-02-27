@@ -1,19 +1,26 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Lock } from "lucide-react";
-import { signIn, signOut, useSession } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import Image from "next/image";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import logo from "./logo.jpg";
-import left from "./left2.svg";
 import ErrorAccount from "../(dashboard)/Components/ErrorAccount";
 import PageLoading from "../(dashboard)/Components/PageLoading";
+import bg from "../../assets/background.jpg";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import logo from "../../assets/logo.png";
+import { useGlobalContext } from "../useGlobalContext";
+import { useGetUserLazyQuery } from "@/graphql/generated";
 
 const LoginPage = () => {
   const { data: session, status } = useSession();
@@ -22,6 +29,16 @@ const LoginPage = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+
+  const { data } = useSession();
+  const { setUser, user } = useGlobalContext();
+  const [useGetUser] = useGetUserLazyQuery({
+    onCompleted({ users }) {
+      const user = users[0];
+      setUser(user);
+      replace("/");
+    },
+  });
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
@@ -40,7 +57,11 @@ const LoginPage = () => {
           }
         } else {
           setLoading(false);
-          replace("/");
+          useGetUser({
+            variables: {
+              email: email,
+            },
+          });
           setError("");
         }
       })
@@ -61,68 +82,59 @@ const LoginPage = () => {
   if (session) return <ErrorAccount />;
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-white">
-      <div className="w-full max-w-4xl bg-white shadow-xl lg:grid lg:grid-cols-2 lg:rounded-lg">
-        <div className="hidden lg:flex items-center justify-center p-12 bg-red-100">
-          <Image
-            src={left}
-            alt="Project Progress Illustration"
-            width={600}
-            height={600}
-            className="object-cover"
-          />
-        </div>
-        <div className="flex flex-col items-center justify-center p-8 lg:p-12">
-          <div className="pb-4">
-            <Image src={logo} alt="logo" height={80} />
-          </div>
-          <h1 className="mb-6 text-3xl font-bold">Login</h1>
-          <form
-            className="w-full space-y-4"
-            onSubmit={(e) => {
-              e.preventDefault();
-              handleLogin(e);
-            }}
-          >
-            <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
-              <Input
-                id="email"
-                type="email"
-                placeholder="Enter your email"
-                required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
+    <div className="flex min-h-screen items-center justify-center ">
+      <Card className="w-full max-w-md">
+        <form onSubmit={handleLogin}>
+          <CardHeader>
+            <div className="  flex place-content-center place-items-center">
+              <img src={logo.src} alt="Logo" className="h-24 w-auto" />
             </div>
-            <div className="space-y-2">
-              <div className="flex items-center justify-between">
-                <Label htmlFor="password">Password</Label>
+            <CardTitle className="text-2xl font-bold pt-2">Login</CardTitle>
+            <CardDescription>
+              Enter your credentials to access your account
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-4">
+              <div className="space-y-2">
+                <Label htmlFor="email">Email</Label>
+                <Input
+                  id="email"
+                  type="email"
+                  placeholder="Enter your email"
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
               </div>
-              <Input
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                id="password"
-                type="password"
-                placeholder="Enter your password"
-                required
-              />
+              <div className="space-y-2">
+                <Label htmlFor="password">Password</Label>
+                <Input
+                  id="password"
+                  type="password"
+                  placeholder="Enter your password"
+                  required
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </div>
             </div>
-            <div className="flex items-center"></div>
-            {error && (
-              <p className="text-sm text-red-500" role="alert">
-                {error}
-              </p>
-            )}
-            <Button
-              type="submit"
-              className="w-full bg-red-500 text-white"
-              disabled={loading}
-            >
-              {loading ? `Loading...` : `Login`}
+          </CardContent>
+          <CardFooter>
+            <Button className="w-full" disabled={loading} type="submit">
+              {loading ? "Loading..." : `Sign In`}
             </Button>
-          </form>
-        </div>
+          </CardFooter>
+        </form>
+      </Card>
+      <div className="absolute top-0 left-0 min-w-screen min-h-screen -z-10 h-screen w-screen bg-green-900">
+        <Image
+          src={bg.src}
+          alt="Background"
+          layout="fill"
+          objectFit="cover"
+          className="z-0"
+        />
       </div>
     </div>
   );

@@ -12,7 +12,7 @@ mutation upsertUser($object: users_insert_input!) {
         firstname
         lastname
       ]
-      constraint: users_email_key
+      constraint: users_pkey
     }
   ) {
     ...UserFragment

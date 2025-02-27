@@ -1,0 +1,7 @@
+fragment EntryFragment on entry {
+  id
+  title
+  value
+
+  sub_record_id
+}
