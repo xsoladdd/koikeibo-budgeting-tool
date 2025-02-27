@@ -28,54 +28,47 @@ const hasData = true;
 const isLoading = false;
 
 const Filter: React.FC = () => {
-  const { record } = useBudgetStore();
+  const { record, setEditNewDialogStatus, setSettingsForm } = useBudgetStore();
   const [isReviewDialogOpen, setIsReviewDialogOpen] = useState(false);
-  const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
-  const [isSettingsDialogOpen, setIsSettingsDialogOpen] = useState(false);
-  const [editingIndex, setEditingIndex] = useState(-1);
-  const [data, setData] = useState(initialData);
-  const [newItem, setNewItem] = useState({ title: "", amount: "" });
-  const [editItems, setEditItems] = useState<
-    { title: string; amount: string }[]
-  >([]);
-  const [settings, setSettings] = useState({
-    monthlyIncome: 1000,
-    needsPercentage: 50,
-    wantsPercentage: 30,
-    culturePercentage: 10,
-    extraPercentage: 5,
-    savingsPercentage: 5,
-  });
 
-  const handleAddItem = () => {
-    if (newItem.title && newItem.amount) {
-      setEditItems([...editItems, newItem]);
-      setNewItem({ title: "", amount: "" });
-    }
-  };
+  const handleSettingsButton = () => {
+    const culturePercentage = record?.sub_records.find(
+      ({ type }) => type === "culture"
+    )?.percentage;
 
-  const handleSaveEdit = () => {
-    const updatedData = [...data];
-    const totalAmount = editItems.reduce(
-      (sum, item) => sum + Number.parseFloat(item.amount),
-      0
+    const extraPercentage = record?.sub_records.find(
+      ({ type }) => type === "extra"
+    )?.percentage;
+
+    const needsPercentage = record?.sub_records.find(
+      ({ type }) => type === "needs"
+    )?.percentage;
+
+    const savingsPercentage = record?.sub_records.find(
+      ({ type }) => type === "savings"
+    )?.percentage;
+
+    const wantsPercentage = record?.sub_records.find(
+      ({ type }) => type === "wants"
+    )?.percentage;
+
+    console.log(
+      needsPercentage,
+      wantsPercentage,
+      culturePercentage,
+      extraPercentage,
+      savingsPercentage
     );
-    updatedData[editingIndex] = {
-      ...updatedData[editingIndex],
-      title: editItems[0].title,
-      estimatedValue: totalAmount.toString(),
-      percentage: ((totalAmount / settings.monthlyIncome) * 100).toFixed(2),
-    };
-    setData(updatedData);
-    setIsEditDialogOpen(false);
+    setSettingsForm({
+      culturePercentage: culturePercentage || 0,
+      extraPercentage: extraPercentage || 0,
+      monthlyIncome: record?.income || 0,
+      needsPercentage: needsPercentage || 0,
+      savingsPercentage: savingsPercentage || 0,
+      wantsPercentage: wantsPercentage || 0,
+    });
+    setEditNewDialogStatus(true);
   };
-
-  const handleSaveSettings = () => {
-    setIsSettingsDialogOpen(false);
-    // Here you would typically update the data based on new settings
-    // For this example, we'll just close the dialog
-  };
-
   return (
     <>
       {" "}
@@ -89,6 +82,7 @@ const Filter: React.FC = () => {
             <Button
               variant="outline"
               disabled={isLoading || (!isLoading && !hasData)}
+              onClick={handleSettingsButton}
             >
               <Settings className="mr-2 h-4 w-4" />
               Settings

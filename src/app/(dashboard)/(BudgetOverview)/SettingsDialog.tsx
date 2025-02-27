@@ -20,7 +20,7 @@ import {
   Users_Constraint,
   useUpsertRecordMutation,
 } from "@/graphql/generated";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useGlobalContext } from "@/app/useGlobalContext";
 
 const SettingsDialog: React.FC = () => {
@@ -47,6 +47,18 @@ const SettingsDialog: React.FC = () => {
       setIsSubmitting(false);
     },
   });
+  useEffect(() => {
+    formik.setValues({
+      monthlyIncome: settingsForm.monthlyIncome,
+      needsPercentage: settingsForm.needsPercentage,
+      wantsPercentage: settingsForm.wantsPercentage,
+      culturePercentage: settingsForm.culturePercentage,
+      extraPercentage: settingsForm.extraPercentage,
+      savingsPercentage: settingsForm.savingsPercentage,
+    });
+
+    return () => {};
+  }, [settingsForm]);
 
   const formik = useFormik({
     initialValues: {
