@@ -56,7 +56,7 @@ const LoginPage = () => {
             console.log(`Login Error`, response);
           }
         } else {
-          setLoading(false);
+          // setLoading(false);
           useGetUser({
             variables: {
               email: email,
