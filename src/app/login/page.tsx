@@ -4,7 +4,7 @@ import { signIn, useSession } from "next-auth/react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import ErrorAccount from "../(dashboard)/Components/ErrorAccount";
+// import ErrorAccount from "../(dashboard)/Components/ErrorAccount";
 import PageLoading from "../(dashboard)/Components/PageLoading";
 import bg from "../../assets/background.jpg";
 import { Label } from "@/components/ui/label";
@@ -79,7 +79,7 @@ const LoginPage = () => {
   }, [email, password]);
 
   if (status === "loading") return <PageLoading />;
-  if (session) return <ErrorAccount />;
+  // if (session) return <ErrorAccount />;
 
   return (
     <div className="flex min-h-screen items-center justify-center ">
