@@ -63,52 +63,60 @@ const FinalizeBudgetDialog: React.FC = () => {
   return (
     <>
       <Dialog open={isReviewDialogOpen} onOpenChange={setIsReviewDialogOpen}>
-        <DialogContent className="sm:max-w-[425px]">
+        <DialogContent className="sm:max-w-lg bg-custom-blue border-transparent !p-6">
           <DialogHeader>
-            <DialogTitle>Review and Finalize Budget</DialogTitle>
-            <DialogDescription>
+            <DialogTitle className="text-custom-yellow">
+              Review and Finalize Budget
+            </DialogTitle>
+            <DialogDescription className="text-custom-yellow/80">
               Please answer the following questions to complete your budget
               review.
             </DialogDescription>
           </DialogHeader>
           <form onSubmit={formik.handleSubmit}>
-            <div className="grid gap-4 py-4">
-              <div className="grid gap-2">
-                <Label htmlFor="note">Note:</Label>
-                <Textarea
-                  id="note"
-                  placeholder="Add any general notes here"
-                  {...formik.getFieldProps("note")}
-                />
-                {formik.touched.note && formik.errors.note
-                  ? err(formik.errors.note)
-                  : null}
-              </div>
-              <div className="grid gap-2">
-                <Label htmlFor="spend-wisely">Did I spend wisely?</Label>
-                <Textarea
-                  id="spend-wisely"
-                  placeholder="Reflect on your spending habits"
-                  {...formik.getFieldProps("spendWisely")}
-                />
-                {formik.touched.spendWisely && formik.errors.spendWisely
-                  ? err(formik.errors.spendWisely)
-                  : null}
-              </div>
-              <div className="grid gap-2">
-                <Label htmlFor="improve">How can I improve next month?</Label>
-                <Textarea
-                  id="improve"
-                  placeholder="List your improvement ideas"
-                  {...formik.getFieldProps("improve")}
-                />
-                {formik.touched.improve && formik.errors.improve
-                  ? err(formik.errors.improve)
-                  : null}
+            <div className="bg-white rounded-2xl px-4 mb-4 py-2">
+              <div className="grid gap-4 py-4">
+                <div className="grid gap-2">
+                  <Label htmlFor="note">Note:</Label>
+                  <Textarea
+                    id="note"
+                    placeholder="Add any general notes here"
+                    {...formik.getFieldProps("note")}
+                  />
+                  {formik.touched.note && formik.errors.note
+                    ? err(formik.errors.note)
+                    : null}
+                </div>
+                <div className="grid gap-2">
+                  <Label htmlFor="spend-wisely">Did I spend wisely?</Label>
+                  <Textarea
+                    id="spend-wisely"
+                    placeholder="Reflect on your spending habits"
+                    {...formik.getFieldProps("spendWisely")}
+                  />
+                  {formik.touched.spendWisely && formik.errors.spendWisely
+                    ? err(formik.errors.spendWisely)
+                    : null}
+                </div>
+                <div className="grid gap-2">
+                  <Label htmlFor="improve">How can I improve next month?</Label>
+                  <Textarea
+                    id="improve"
+                    placeholder="List your improvement ideas"
+                    {...formik.getFieldProps("improve")}
+                  />
+                  {formik.touched.improve && formik.errors.improve
+                    ? err(formik.errors.improve)
+                    : null}
+                </div>
               </div>
             </div>
             <DialogFooter>
-              <Button type="submit" disabled={formik.isSubmitting}>
+              <Button
+                type="submit"
+                disabled={formik.isSubmitting}
+                variant={"secondary"}
+              >
                 {formik.isSubmitting ? "Submitting..." : "Save and Close"}
               </Button>
             </DialogFooter>

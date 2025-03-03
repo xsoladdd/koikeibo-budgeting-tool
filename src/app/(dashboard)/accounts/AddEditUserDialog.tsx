@@ -203,124 +203,127 @@ const AddEditUserDialog: React.FC<UserEditDialogProps> = ({
       onOpenChange={() => setEditingUser(null)}
     >
       <DialogTrigger asChild></DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="sm:max-w-lg w-full bg-custom-blue border-transparent !p-6">
         <DialogHeader>
-          <DialogTitle>
+          <DialogTitle className="text-custom-yellow">
             {isEditMode ? `Edit User: ${editingUser?.email}` : `Add User`}
           </DialogTitle>
         </DialogHeader>
-        <div className="grid gap-4 py-4">
-          {dialogType === "add" && (
+        <div className="bg-white rounded-2xl px-4   py-2">
+          <div className="grid gap-4 py-4">
+            {dialogType === "add" && (
+              <div className="grid grid-cols-4 items-center gap-4">
+                <Label htmlFor="email" className="text-right">
+                  Email
+                </Label>
+                <Input
+                  id="email"
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="col-span-3"
+                />
+              </div>
+            )}
+
             <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="email" className="text-right">
-                Email
+              <Label htmlFor="firstname" className="text-right">
+                First name
               </Label>
               <Input
-                id="email"
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                id="firstname"
+                type="text"
+                value={editingUser?.firstname || ""}
+                onChange={(e) =>
+                  setEditingUser({
+                    ...editingUser!,
+                    firstname: e.target.value!,
+                  })
+                }
                 className="col-span-3"
               />
             </div>
-          )}
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="lastname" className="text-right">
+                Last name
+              </Label>
+              <Input
+                id="lastname"
+                type="text"
+                value={editingUser?.lastname || ""}
+                onChange={(e) =>
+                  setEditingUser({
+                    ...editingUser!,
+                    lastname: e.target.value!,
+                  })
+                }
+                className="col-span-3"
+              />
+            </div>
 
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="firstname" className="text-right">
-              First name
-            </Label>
-            <Input
-              id="firstname"
-              type="text"
-              value={editingUser?.firstname || ""}
-              onChange={(e) =>
-                setEditingUser({
-                  ...editingUser!,
-                  firstname: e.target.value!,
-                })
-              }
-              className="col-span-3"
-            />
-          </div>
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="lastname" className="text-right">
-              Last name
-            </Label>
-            <Input
-              id="lastname"
-              type="text"
-              value={editingUser?.lastname || ""}
-              onChange={(e) =>
-                setEditingUser({
-                  ...editingUser!,
-                  lastname: e.target.value!,
-                })
-              }
-              className="col-span-3"
-            />
-          </div>
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="password" className="text-right">
+                Password
+              </Label>
+              <Input
+                id="password"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="col-span-3"
+              />
+            </div>
 
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="password" className="text-right">
-              Password
-            </Label>
-            <Input
-              id="password"
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="col-span-3"
-            />
-          </div>
+            {/* <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="role" className="text-right">
+                Role
+              </Label>
+              <Select
+                value={editingUser?.role}
+                onValueChange={(value) =>
+                  setEditingUser({
+                    ...editingUser!,
+                    role: value,
+                  })
+                }
+              >
+                <SelectTrigger className="col-span-3">
+                  <SelectValue placeholder="Select a role" />
+                </SelectTrigger>
+                <SelectContent>
+                  {ROLES.filter(({ value }) => value !== "BACKDOOR_ADMIN").map(
+                    ({ label, value }, idx) => (
+                      <SelectItem value={value} key={idx}>
+                        {label}
+                      </SelectItem>
+                    )
+                  )}
+                </SelectContent>
+              </Select>
+            </div> */}
 
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="role" className="text-right">
-              Role
-            </Label>
-            <Select
-              value={editingUser?.role}
-              onValueChange={(value) =>
-                setEditingUser({
-                  ...editingUser!,
-                  role: value,
-                })
-              }
-            >
-              <SelectTrigger className="col-span-3">
-                <SelectValue placeholder="Select a role" />
-              </SelectTrigger>
-              <SelectContent>
-                {ROLES.filter(({ value }) => value !== "BACKDOOR_ADMIN").map(
-                  ({ label, value }, idx) => (
-                    <SelectItem value={value} key={idx}>
-                      {label}
-                    </SelectItem>
-                  )
-                )}
-              </SelectContent>
-            </Select>
-          </div>
+            {userFields}
 
-          {userFields}
-
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="isLocked" className="text-right">
-              Locked
-            </Label>
-            <Checkbox
-              id="isLocked"
-              checked={editingUser?.isLocked}
-              onCheckedChange={(checked) =>
-                setEditingUser({
-                  ...editingUser!,
-                  isLocked: checked as boolean,
-                })
-              }
-            />
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="isLocked" className="text-right">
+                Locked
+              </Label>
+              <Checkbox
+                id="isLocked"
+                checked={editingUser?.isLocked}
+                onCheckedChange={(checked) =>
+                  setEditingUser({
+                    ...editingUser!,
+                    isLocked: checked as boolean,
+                  })
+                }
+              />
+            </div>
           </div>
         </div>
         <div className="flex justify-end">
           <Button
+            variant={"secondary"}
             onClick={handleSaveUser}
             disabled={upsertLoading || updateLoading || !editingUser?.role}
           >

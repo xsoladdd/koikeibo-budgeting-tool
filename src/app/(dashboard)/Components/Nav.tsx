@@ -36,7 +36,7 @@ function Nav() {
   return (
     <>
       <NewPasswordDialog />
-      <nav className=" shadow-md  text-black ">
+      <nav className=" shadow-md  text-black bg-white ">
         <div className="px-2 lg:px-24 mx-auto ">
           <div className="flex justify-between h-16">
             <div className="flex items-center">

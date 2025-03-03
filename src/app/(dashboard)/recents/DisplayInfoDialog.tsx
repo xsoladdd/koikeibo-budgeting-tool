@@ -43,10 +43,14 @@ const DisplayInfoDialog: React.FC<DisplayInfoDialogProps> = ({
     <>
       {" "}
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent className="sm:max-w-[600px] ">
+        <DialogContent className="sm:max-w-[600px] bg-custom-blue border-transparent">
           <DialogHeader>
-            <DialogTitle>Record #{activeRecord.inc_id}</DialogTitle>
-            <DialogDescription>Transaction detailed summary</DialogDescription>
+            <DialogTitle className="text-[#ebdaaf]">
+              Record #{activeRecord.inc_id}
+            </DialogTitle>
+            <DialogDescription className="text-[#ebdaaf]/80">
+              Transaction detailed summary
+            </DialogDescription>
           </DialogHeader>
           <Tabs defaultValue={arrangement[0]} className="mt-4">
             <TabsList className="grid w-full grid-cols-2 min-h-[100px] md:grid-cols-6 md:min-h-[unset]">
@@ -56,7 +60,7 @@ const DisplayInfoDialog: React.FC<DisplayInfoDialogProps> = ({
                 </TabsTrigger>
               ))}
             </TabsList>
-            <ScrollArea className="h-[300px] mt-4 rounded-md border p-4">
+            <ScrollArea className="h-[300px] mt-4 rounded-md border p-4 bg-white">
               {arrangement.map((f, idx) => {
                 if (f === "insights") {
                   const percentageDisplay = activeRecord.sub_records
@@ -72,10 +76,10 @@ const DisplayInfoDialog: React.FC<DisplayInfoDialogProps> = ({
                         General Note: {activeRecord.note}
                       </p>
                       <p className="text-sm">
-                        Speding Notes: {activeRecord.note}
+                        Speding Notes: {activeRecord.question1}
                       </p>
                       <p className="text-sm">
-                        Improvement Notes: {activeRecord.note}
+                        Improvement Notes: {activeRecord.question2}
                       </p>
                     </TabsContent>
                   );
