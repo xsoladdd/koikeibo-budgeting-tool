@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 import clsx from "clsx";
 import { Toaster } from "@/components/CustomToaster";
 import { useGlobalContext } from "../useGlobalContext";
+import { isClientSide } from "@/lib/isClientSide";
 interface DashboardLayoutProps {
   children: ReactNode;
 }
@@ -17,8 +18,9 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
   const { user } = useGlobalContext();
   console.log(user?.id);
   if (user?.id === undefined) {
-    console.log("redirect");
-    window.location.href = "/login";
+    if (isClientSide()) {
+      window.location.href = "/login";
+    }
   }
   return (
     <div>
