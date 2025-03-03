@@ -1,16 +1,35 @@
-TODO
-    - New Password prompt
-    - Checkout functionalities
-    - Create page for managing order status.
-    - Settings page
-        - Category CRUD
+bale ito nalang po need/aayusin sa website
+- design
+D - fix bugs -> "self reflection" part
+- will notify the user if nag exceed na si user sa budget (sa may listing part)
+D - sa "sections" part ng account hanggang 4 lang
+D - sa may "role" part remove cafeteria staff
 
+grade 12
+abm 1
+abm 2
+abm 3
+stem 1
+stem 2
+stem 3
+stem/humss 4
+humss 1
+humss 2
+humss 3
+tvl ict
+tvl he
 
-ONGOING
-
-
-DOONE
-    - Image upload to cloudinary
-    - Menu Management
-    - Create user form
-    - manage-menu page.
+grade11
+abm 1
+abm 2
+abm 3
+stem 1
+stem 2
+stem 3
+stem/humss 4
+humss 1
+humss 2
+humss 3
+tvl ict
+tvl he
+tvl he-ict

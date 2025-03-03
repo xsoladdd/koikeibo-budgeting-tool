@@ -31,9 +31,9 @@ const page: NextPage<{}> = ({}) => {
   });
 
   return (
-    <main className="flex min-h-screen flex-col items-center py-24">
-      <h1 className="text-2xl font-bold mb-6">Budget Overview</h1>
-      <Card className="w-full pt-4 min-h-[500px]">
+    <main className="flex min-h-screen flex-col items-center py-24 ">
+      <h1 className="text-2xl font-bold mb-6 ">Budget Overview</h1>
+      <Card className="w-full pt-4 min-h-[500px] bg-custom-yellow border-transparent">
         <CardContent>
           <Filter />
           <SettingsDialog />

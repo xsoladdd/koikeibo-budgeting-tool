@@ -52,9 +52,12 @@ const Filter: React.FC = () => {
       <div className="w-full flex justify-between items-center pb-4">
         <div className="flex items-center space-x-4 justify-between w-full">
           <div className="flex gap-4 place-items-center">
-            <Label>
-              Income: {pesoSign}
-              {record?.income}
+            <Label className="uppercase">
+              Income:{" "}
+              <span className="font-semibold">
+                {pesoSign}
+                {record?.income}
+              </span>
             </Label>
           </div>
           <div className="flex gap-4">

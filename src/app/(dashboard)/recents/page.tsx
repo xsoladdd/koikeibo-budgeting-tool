@@ -47,7 +47,7 @@ const page: React.FC = () => {
   return (
     <main className="flex min-h-screen flex-col items-center py-24">
       <h1 className="text-2xl font-bold mb-6">Recent Entries</h1>
-      <Card className="w-full pt-4 min-h-[530px]">
+      <Card className="w-full pt-4 min-h-[530px] bg-custom-yellow border-transparent">
         <CardContent>
           {loading && (
             <div className="w-full h-full flex place-content-center place-items-center py-24">
@@ -57,26 +57,34 @@ const page: React.FC = () => {
           {!loading && records && (
             <Table>
               <TableHeader>
-                <TableRow>
-                  <TableHead>RecordID</TableHead>
-                  <TableHead>Income</TableHead>
-                  <TableHead>Note</TableHead>
-                  <TableHead className="hidden md:table-cell">
+                <TableRow className="border-custom-blue/30">
+                  <TableHead className="text-custom-blue font-semibold uppercase">
+                    Record ID
+                  </TableHead>
+                  <TableHead className="text-custom-blue font-semibold uppercase">
+                    Income
+                  </TableHead>
+                  <TableHead className="text-custom-blue font-semibold uppercase">
+                    Note
+                  </TableHead>
+                  <TableHead className="hidden md:table-cell text-custom-blue font-semibold uppercase">
                     T.Savings
                   </TableHead>
-                  <TableHead className="hidden md:table-cell">
+                  <TableHead className="hidden md:table-cell text-custom-blue font-semibold uppercase">
                     T.Needs
                   </TableHead>
-                  <TableHead className="hidden md:table-cell">
+                  <TableHead className="hidden md:table-cell text-custom-blue font-semibold uppercase">
                     T.Culture
                   </TableHead>
-                  <TableHead className="hidden md:table-cell">
+                  <TableHead className="hidden md:table-cell text-custom-blue font-semibold uppercase">
                     T.Wants
                   </TableHead>
-                  <TableHead className="hidden md:table-cell">
+                  <TableHead className="hidden md:table-cell text-custom-blue font-semibold uppercase">
                     T.Extra
                   </TableHead>
-                  <TableHead className="text-right">Actions</TableHead>
+                  <TableHead className="text-right text-custom-blue font-semibold uppercase">
+                    Actions
+                  </TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -92,7 +100,7 @@ const page: React.FC = () => {
                   const totalWants = getTotal("wants");
                   const totalExtra = getTotal("extra");
                   return (
-                    <TableRow key={record.id}>
+                    <TableRow key={record.id} className="border-custom-blue/30">
                       <TableCell>{record.inc_id}</TableCell>
                       <TableCell>
                         {" "}

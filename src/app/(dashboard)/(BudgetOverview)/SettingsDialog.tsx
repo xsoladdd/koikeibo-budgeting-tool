@@ -166,91 +166,99 @@ const SettingsDialog: React.FC = () => {
           setEditNewDialogStatus(b);
         }}
       >
-        <DialogContent className="sm:max-w-[425px]">
+        <DialogContent className="sm:max-w-lg bg-custom-blue border-transparent !p-6">
           <DialogHeader>
-            <DialogTitle>Budget Settings</DialogTitle>
-            <DialogDescription>
+            <DialogTitle className="text-custom-yellow">
+              Budget Settings
+            </DialogTitle>
+            <DialogDescription className="text-custom-yellow/80">
               Note: Make sure total percentage is equal to 100 %
             </DialogDescription>
           </DialogHeader>
           <form onSubmit={formik.handleSubmit}>
-            <div className="grid gap-4 py-4">
-              <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="monthlyIncome" className="text-right">
-                  Monthly Income
-                </Label>
-                <Input
-                  id="monthlyIncome"
-                  type="number"
-                  value={formik.values.monthlyIncome}
-                  onChange={formik.handleChange}
-                  className="col-span-3"
-                />
-              </div>
-              <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="needsPercentage" className="text-right">
-                  Needs %
-                </Label>
-                <Input
-                  id="needsPercentage"
-                  type="number"
-                  value={formik.values.needsPercentage}
-                  onChange={formik.handleChange}
-                  className="col-span-3"
-                />
-              </div>
-              <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="wantsPercentage" className="text-right">
-                  Wants %
-                </Label>
-                <Input
-                  id="wantsPercentage"
-                  type="number"
-                  value={formik.values.wantsPercentage}
-                  onChange={formik.handleChange}
-                  className="col-span-3"
-                />
-              </div>
-              <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="culturePercentage" className="text-right">
-                  Culture %
-                </Label>
-                <Input
-                  id="culturePercentage"
-                  type="number"
-                  value={formik.values.culturePercentage}
-                  onChange={formik.handleChange}
-                  className="col-span-3"
-                />
-              </div>
-              <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="extraPercentage" className="text-right">
-                  Extra %
-                </Label>
-                <Input
-                  id="extraPercentage"
-                  type="number"
-                  value={formik.values.extraPercentage}
-                  onChange={formik.handleChange}
-                  className="col-span-3"
-                />
-              </div>
-              <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="savingsPercentage" className="text-right">
-                  Savings %
-                </Label>
-                <Input
-                  id="savingsPercentage"
-                  type="number"
-                  value={formik.values.savingsPercentage}
-                  onChange={formik.handleChange}
-                  className="col-span-3"
-                />
+            <div className="bg-white rounded-2xl px-4 mb-4 py-2">
+              <div className="grid gap-4 py-4">
+                <div className="grid grid-cols-4 items-center gap-4">
+                  <Label htmlFor="monthlyIncome" className="text-right">
+                    Monthly Income
+                  </Label>
+                  <Input
+                    id="monthlyIncome"
+                    type="number"
+                    value={formik.values.monthlyIncome}
+                    onChange={formik.handleChange}
+                    className="col-span-3"
+                  />
+                </div>
+                <div className="grid grid-cols-4 items-center gap-4">
+                  <Label htmlFor="needsPercentage" className="text-right">
+                    Needs %
+                  </Label>
+                  <Input
+                    id="needsPercentage"
+                    type="number"
+                    value={formik.values.needsPercentage}
+                    onChange={formik.handleChange}
+                    className="col-span-3"
+                  />
+                </div>
+                <div className="grid grid-cols-4 items-center gap-4">
+                  <Label htmlFor="wantsPercentage" className="text-right">
+                    Wants %
+                  </Label>
+                  <Input
+                    id="wantsPercentage"
+                    type="number"
+                    value={formik.values.wantsPercentage}
+                    onChange={formik.handleChange}
+                    className="col-span-3"
+                  />
+                </div>
+                <div className="grid grid-cols-4 items-center gap-4">
+                  <Label htmlFor="culturePercentage" className="text-right">
+                    Culture %
+                  </Label>
+                  <Input
+                    id="culturePercentage"
+                    type="number"
+                    value={formik.values.culturePercentage}
+                    onChange={formik.handleChange}
+                    className="col-span-3"
+                  />
+                </div>
+                <div className="grid grid-cols-4 items-center gap-4">
+                  <Label htmlFor="extraPercentage" className="text-right">
+                    Extra %
+                  </Label>
+                  <Input
+                    id="extraPercentage"
+                    type="number"
+                    value={formik.values.extraPercentage}
+                    onChange={formik.handleChange}
+                    className="col-span-3"
+                  />
+                </div>
+                <div className="grid grid-cols-4 items-center gap-4">
+                  <Label htmlFor="savingsPercentage" className="text-right">
+                    Savings %
+                  </Label>
+                  <Input
+                    id="savingsPercentage"
+                    type="number"
+                    value={formik.values.savingsPercentage}
+                    onChange={formik.handleChange}
+                    className="col-span-3"
+                  />
+                </div>
               </div>
             </div>
             <DialogFooter className="flex !justify-between w-full place-content-center place-items-center">
-              <p className="text-xs ">{`Total: ${totalPercentage}%`}</p>
-              <Button type="submit" disabled={isNot100 || isSubmitting}>
+              <p className="text-xs text-custom-yellow">{`Total: ${totalPercentage}%`}</p>
+              <Button
+                type="submit"
+                variant={"secondary"}
+                disabled={isNot100 || isSubmitting}
+              >
                 {isSubmitting ? `Loading...` : `Save Changes`}
               </Button>
             </DialogFooter>

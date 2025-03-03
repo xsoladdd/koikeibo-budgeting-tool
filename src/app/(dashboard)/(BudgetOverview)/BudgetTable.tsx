@@ -32,17 +32,27 @@ const BudgetTable: React.FC = () => {
     <>
       <Table>
         <TableHeader>
-          <TableRow>
-            <TableHead>Title</TableHead>
-            <TableHead>Estimated Value</TableHead>
-            <TableHead>Percentage</TableHead>
-            <TableHead>Actual</TableHead>
-            <TableHead>Action</TableHead>
+          <TableRow className="border-custom-blue/30">
+            <TableHead className="text-custom-blue font-semibold uppercase">
+              Title
+            </TableHead>
+            <TableHead className="text-custom-blue font-semibold uppercase">
+              Percentage
+            </TableHead>
+            <TableHead className="text-custom-blue font-semibold uppercase">
+              Estimated Value
+            </TableHead>
+            <TableHead className="text-custom-blue font-semibold uppercase">
+              Actual
+            </TableHead>
+            <TableHead className="text-custom-blue font-semibold uppercase">
+              Action
+            </TableHead>
           </TableRow>
         </TableHeader>
         {recordLoading && (
           <TableBody>
-            <TableRow>
+            <TableRow className="border-custom-blue/30">
               <TableCell colSpan={5}>
                 <div className="w-full h-full flex place-content-center place-items-center py-24">
                   <LoaderCircle
@@ -57,7 +67,7 @@ const BudgetTable: React.FC = () => {
         )}
         {!recordLoading && !record && (
           <TableBody>
-            <TableRow>
+            <TableRow className="border-custom-blue/30">
               <TableCell colSpan={5}>
                 <div className="flex place-content-center">
                   {" "}
@@ -81,12 +91,12 @@ const BudgetTable: React.FC = () => {
                 0
               );
               return (
-                <TableRow key={index}>
-                  <TableCell>{row.type}</TableCell>
+                <TableRow key={index} className="border-custom-blue/30">
+                  <TableCell className="uppercase">{row.type}</TableCell>
+                  <TableCell>{row.percentage}%</TableCell>
                   <TableCell>
                     {pesoSign} {estimate}
                   </TableCell>
-                  <TableCell>{row.percentage}%</TableCell>
                   <TableCell>
                     {pesoSign} {actual}
                   </TableCell>

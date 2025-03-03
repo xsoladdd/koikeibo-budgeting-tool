@@ -12,7 +12,7 @@ const page: React.FC = () => {
   return (
     <main className="flex min-h-screen flex-col items-center py-24">
       <h1 className="text-2xl font-bold mb-6">Account Management</h1>
-      <Card>
+      <Card className="w-full pt-4 min-h-[500px] bg-custom-yellow border-transparent">
         <CardContent>
           <AccountTable />
         </CardContent>

@@ -205,25 +205,41 @@ const AccountTable: React.FC = ({}) => {
       </div>
       <Table>
         <TableHeader>
-          <TableRow>
-            <TableHead>Name</TableHead>
-            <TableHead>Email</TableHead>
-            <TableHead>Role</TableHead>
-            <TableHead>Locked</TableHead>
-            <TableHead>Grade</TableHead>
-            <TableHead>Strand</TableHead>
-            <TableHead>Section</TableHead>
-            <TableHead className="text-right">Actions</TableHead>
+          <TableRow className="border-custom-blue/30">
+            <TableHead className="text-custom-blue font-semibold uppercase">
+              Name
+            </TableHead>
+            <TableHead className="text-custom-blue font-semibold uppercase">
+              Email
+            </TableHead>
+            {/* <TableHead className="text-custom-blue font-semibold uppercase">
+              Role
+            </TableHead> */}
+            <TableHead className="text-custom-blue font-semibold uppercase">
+              Locked
+            </TableHead>
+            <TableHead className="text-custom-blue font-semibold uppercase">
+              Grade
+            </TableHead>
+            <TableHead className="text-custom-blue font-semibold uppercase">
+              Strand
+            </TableHead>
+            <TableHead className="text-custom-blue font-semibold uppercase">
+              Section
+            </TableHead>
+            <TableHead className="text-right text-custom-blue font-semibold uppercase">
+              Actions
+            </TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           {data?.users.map((user) => (
-            <TableRow key={user.id}>
+            <TableRow key={user.id} className="border-custom-blue/30">
               <TableCell>{`${user.firstname} ${user.lastname}`}</TableCell>
               <TableCell>{user.email}</TableCell>
-              <TableCell className="capitalize">
+              {/* <TableCell className="capitalize">
                 {renderRole(user.role)}
-              </TableCell>
+              </TableCell> */}
               <TableCell>{user.isLocked ? "Yes" : "No"}</TableCell>
               <TableCell>{user.grade || "N/A"}</TableCell>
               <TableCell>{user.strand || "N/A"}</TableCell>

@@ -13,6 +13,8 @@ const config: Config = {
         custom: {
           primary: "#1A2030",
           secodary: "#902716",
+          yellow: "#ebdaaf",
+          blue: "#1A2030",
         },
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
