@@ -19,9 +19,4 @@ export const navItems = [
     id: "logout-btn",
     roleAccess: ["*"],
   },
-  // {
-  //   name: "Login",
-  //   id: "login-btn",
-  //   roleAccess: ["*"],
-  // },
 ];
