@@ -6,6 +6,7 @@ import { GetServerSideProps, Metadata } from "next";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
 import { Toaster } from "@/components/CustomToaster";
+import { useGlobalContext } from "../useGlobalContext";
 interface DashboardLayoutProps {
   children: ReactNode;
 }
@@ -13,6 +14,12 @@ interface DashboardLayoutProps {
 const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
   usePopulateStore();
   const pathName = usePathname();
+  const { user } = useGlobalContext();
+  console.log(user?.id);
+  if (user?.id === undefined) {
+    console.log("redirect");
+    window.location.href = "/login";
+  }
   return (
     <div>
       <Nav />

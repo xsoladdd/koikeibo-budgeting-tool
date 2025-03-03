@@ -15,7 +15,7 @@ import logo from "../../../assets/logo.png";
 
 function Nav() {
   const { replace } = useRouter();
-  const { user } = useGlobalContext();
+  const { user, resetUser } = useGlobalContext();
   const pathname = usePathname();
   const role = user?.role!;
   const hasUser = !!user?.id;
@@ -28,7 +28,10 @@ function Nav() {
     return () => {};
   }, [pathname]);
 
-  const handleLogout = () => signOut({ redirectTo: "/login" });
+  const handleLogout = () => {
+    resetUser();
+    signOut({ redirectTo: "/login" });
+  };
 
   return (
     <>
