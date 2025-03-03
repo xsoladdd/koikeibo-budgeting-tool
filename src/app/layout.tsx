@@ -15,8 +15,8 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "CampusCrave",
-  description: "",
+  title: "KoiKeibo",
+  description: `A budgeting tool based on a Japanese saving method. The word can be translated as "household ledger" and is meant for household financial management. Kakeibo vary in structure, but the basic idea is the same`,
 };
 
 export default function RootLayout({
