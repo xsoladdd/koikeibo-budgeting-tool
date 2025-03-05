@@ -12,6 +12,7 @@ import { Edit, LoaderCircle } from "lucide-react";
 import React, { useState } from "react";
 import useBudgetStore from "./useBudgetStore";
 import { pesoSign } from "@/lib/pesoSign";
+import { renderType } from "@/lib/renderType";
 
 const BudgetTable: React.FC = () => {
   const {
@@ -92,7 +93,9 @@ const BudgetTable: React.FC = () => {
               );
               return (
                 <TableRow key={index} className="border-custom-blue/30">
-                  <TableCell className="uppercase">{row.type}</TableCell>
+                  <TableCell className="uppercase">
+                    {renderType(row.type)}
+                  </TableCell>
                   <TableCell>{row.percentage}%</TableCell>
                   <TableCell>
                     {pesoSign} {estimate}

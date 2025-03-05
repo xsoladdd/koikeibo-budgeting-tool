@@ -22,6 +22,7 @@ import useBudgetStore from "./useBudgetStore";
 import { ConfirmationDialog } from "@/components/WarningDialog";
 import { toast } from "sonner";
 import { pesoSign } from "@/lib/pesoSign";
+import { renderType } from "@/lib/renderType";
 
 const EditSubDialog: React.FC = () => {
   const [item, setItem] = useState<{
@@ -147,7 +148,7 @@ const EditSubDialog: React.FC = () => {
         <DialogContent className="sm:max-w-lg bg-custom-blue border-transparent !p-6">
           <DialogHeader>
             <DialogTitle className="capitalize text-custom-yellow">
-              Edit {activeEdit.type}
+              Edit {renderType(activeEdit.type)}
             </DialogTitle>
             <DialogDescription className="text-custom-yellow">
               Add or modify items for this category.

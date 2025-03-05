@@ -24,11 +24,11 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
   return (
     <div className="">
       <Nav />
-      <main className={clsx(`px-2 md:px-24 pt-4 min-h-screen `)}>
+      <main className={clsx(`px-2 md:px-24 pt-4 min-h-screen bg-main`)}>
         {children}
 
         <style jsx global>{`
-          body {
+          .bg-main {
             background-image: url(${bg.src});
             background-size: cover;
             background-repeat: no-repeat;

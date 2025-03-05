@@ -80,7 +80,7 @@ const page: React.FC = () => {
                     T.Wants
                   </TableHead>
                   <TableHead className="hidden md:table-cell text-custom-blue font-semibold uppercase">
-                    T.Extra
+                    T.Unplanned
                   </TableHead>
                   <TableHead className="text-right text-custom-blue font-semibold uppercase">
                     Actions
