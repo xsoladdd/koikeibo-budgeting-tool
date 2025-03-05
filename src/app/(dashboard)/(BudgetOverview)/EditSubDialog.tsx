@@ -142,6 +142,8 @@ const EditSubDialog: React.FC = () => {
         onOpenChange={() => {
           if (!loading) {
             resetActiveEdit();
+            setError("");
+            setItem({ ...item, title: "", amount: "" });
           }
         }}
       >

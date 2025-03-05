@@ -174,10 +174,7 @@ const AccountTable: React.FC = ({}) => {
               <SelectItem value={"all"} className="capitalize">
                 All Section
               </SelectItem>
-              {SECTION.find(
-                ({ grade_level, strand }) =>
-                  grade_level === filter.grade && strand === filter.strand
-              )?.sections?.map((label, idx) => (
+              {SECTION[0].sections?.map((label, idx) => (
                 <SelectItem key={idx} value={label} className="capitalize">
                   {label}
                 </SelectItem>
