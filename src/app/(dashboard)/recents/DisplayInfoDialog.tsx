@@ -14,6 +14,7 @@ import { ChevronRight, ListChecks } from "lucide-react";
 import React, { useState } from "react";
 import useRecentStore from "./useRecentContext";
 import { pesoSign } from "@/lib/pesoSign";
+import { renderType } from "@/lib/renderType";
 
 interface DisplayInfoDialogProps {
   subEntryId: string;
@@ -56,7 +57,7 @@ const DisplayInfoDialog: React.FC<DisplayInfoDialogProps> = ({
             <TabsList className="grid w-full grid-cols-2 min-h-[100px] md:grid-cols-6 md:min-h-[unset]">
               {arrangement.map((f) => (
                 <TabsTrigger value={f} key={f} className="capitalize">
-                  {f}
+                  {renderType(f)}
                 </TabsTrigger>
               ))}
             </TabsList>
@@ -102,7 +103,9 @@ const DisplayInfoDialog: React.FC<DisplayInfoDialogProps> = ({
                 return (
                   <TabsContent value={f} key={idx} className="mt-0">
                     <p className="pb-2">
-                      <span className="capitalize pr-1">{subRecord?.type}</span>
+                      <span className="capitalize pr-1">
+                        {renderType(subRecord?.type)}
+                      </span>
                       <span>({subRecord?.percentage}%)</span>
                     </p>
                     <div className="pb-2">

@@ -228,7 +228,7 @@ const SettingsDialog: React.FC = () => {
                 </div>
                 <div className="grid grid-cols-4 items-center gap-4">
                   <Label htmlFor="extraPercentage" className="text-right">
-                    Extra %
+                    Unplanned %
                   </Label>
                   <Input
                     id="extraPercentage"

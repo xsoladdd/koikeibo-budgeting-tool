@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 // import ErrorAccount from "../(dashboard)/Components/ErrorAccount";
 import PageLoading from "../(dashboard)/Components/PageLoading";
-import bg from "../../assets/background.jpg";
+// import bg from "../../assets/background.jpg";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import {
@@ -21,6 +21,7 @@ import { Button } from "@/components/ui/button";
 import logo from "../../assets/logo.png";
 import { useGlobalContext } from "../useGlobalContext";
 import { useGetUserLazyQuery } from "@/graphql/generated";
+import bg from "../../assets/login.gif";
 
 const LoginPage = () => {
   const { data: session, status } = useSession();
@@ -82,61 +83,71 @@ const LoginPage = () => {
   // if (session) return <ErrorAccount />;
 
   return (
-    <div className="flex min-h-screen items-center justify-center ">
-      <Card className="w-full max-w-md m-3">
-        <form onSubmit={handleLogin}>
-          <CardHeader>
-            <div className="  flex place-content-center place-items-center">
-              <img src={logo.src} alt="Logo" className="h-24 w-auto" />
-            </div>
-            <CardTitle className="text-2xl font-bold pt-2">Login</CardTitle>
-            <CardDescription>
-              Enter your credentials to access your account
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
-              <div className="space-y-2">
-                <Label htmlFor="email">Email</Label>
-                <Input
-                  id="email"
-                  type="email"
-                  placeholder="Enter your email"
-                  required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
+    <>
+      <style jsx global>{`
+        .bg-login {
+          background-image: url(${bg.src});
+          background-size: cover;
+          background-repeat: no-repeat;
+          background-attachment: fixed;
+        }
+      `}</style>
+      <div className="flex min-h-screen items-center justify-center bg-login">
+        <Card className="w-full max-w-md m-3">
+          <form onSubmit={handleLogin}>
+            <CardHeader>
+              <div className="  flex place-content-center place-items-center">
+                <img src={logo.src} alt="Logo" className="h-24 w-auto" />
               </div>
-              <div className="space-y-2">
-                <Label htmlFor="password">Password</Label>
-                <Input
-                  id="password"
-                  type="password"
-                  placeholder="Enter your password"
-                  required
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
+              <CardTitle className="text-2xl font-bold pt-2">Login</CardTitle>
+              <CardDescription>
+                Enter your credentials to access your account
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                <div className="space-y-2">
+                  <Label htmlFor="email">Email</Label>
+                  <Input
+                    id="email"
+                    type="email"
+                    placeholder="Enter your email"
+                    required
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="password">Password</Label>
+                  <Input
+                    id="password"
+                    type="password"
+                    placeholder="Enter your password"
+                    required
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                </div>
               </div>
-            </div>
-          </CardContent>
-          <CardFooter>
-            <Button className="w-full" disabled={loading} type="submit">
-              {loading ? "Loading..." : `Sign In`}
-            </Button>
-          </CardFooter>
-        </form>
-      </Card>
-      <div className="absolute top-0 left-0 min-w-screen min-h-screen -z-10 h-screen w-screen bg-green-900">
-        <Image
-          src={bg.src}
-          alt="Background"
-          layout="fill"
-          objectFit="cover"
-          className="z-0"
-        />
+            </CardContent>
+            <CardFooter>
+              <Button className="w-full" disabled={loading} type="submit">
+                {loading ? "Loading..." : `Sign In`}
+              </Button>
+            </CardFooter>
+          </form>
+        </Card>
+        {/* <div className="absolute top-0 left-0 min-w-screen min-h-screen -z-10 h-screen w-screen bg-green-900">
+          <Image
+            src={bg.src}
+            alt="Background"
+            layout="fill"
+            objectFit="cover"
+            className="z-0"
+          />
+        </div> */}
       </div>
-    </div>
+    </>
   );
 };
 
