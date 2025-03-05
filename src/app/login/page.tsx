@@ -90,6 +90,13 @@ const LoginPage = () => {
           background-size: cover;
           background-repeat: no-repeat;
           background-attachment: fixed;
+          background-position: bottom right;
+        }
+
+        @media (max-width: 768px) {
+          .bg-login {
+            background-position: bottom right;
+          }
         }
       `}</style>
       <div className="flex min-h-screen items-center justify-center bg-login">
