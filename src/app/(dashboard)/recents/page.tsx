@@ -13,19 +13,21 @@ import {
 import { useGetPreviousRecordsQuery } from "@/graphql/generated";
 import { pesoSign } from "@/lib/pesoSign";
 import { BookOpen, Edit, LoaderCircle, View } from "lucide-react";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import DisplayInfoDialog from "./DisplayInfoDialog";
 import useRecentStore from "./useRecentContext";
 import TablePagination from "../Components/TablePagination";
+import { usePathname } from "next/navigation";
 
 const page: React.FC = () => {
   const { user } = useGlobalContext();
+  const pathname = usePathname();
   const [viewId, setViewId] = useState("");
   const perPageCount = 10;
   const { isRecordsLoading, setRecords, setRecordsLoading, records } =
     useRecentStore();
   const [activePage, setActivePage] = useState(1);
-  const { data } = useGetPreviousRecordsQuery({
+  const { data, refetch } = useGetPreviousRecordsQuery({
     skip: !user,
     variables: {
       user_id: user?.id,
@@ -33,6 +35,7 @@ const page: React.FC = () => {
       offset: (activePage - 1) * perPageCount,
     },
     notifyOnNetworkStatusChange: true,
+    fetchPolicy: "cache-and-network",
     onCompleted: (data) => {
       if (data.records) {
         setRecords(data.records);
@@ -40,6 +43,14 @@ const page: React.FC = () => {
       setRecordsLoading(false);
     },
   });
+
+  useEffect(() => {
+    if (pathname === "/recents") {
+      console.log(`refetch`);
+      refetch();
+    }
+  }, [pathname]);
+
   const loading = isRecordsLoading;
   const totalPage = Math.ceil(
     (data?.records_aggregate.aggregate?.count || 0) / perPageCount
